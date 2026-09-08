@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-c1: var(--c1);
+  --color-c2: var(--c2);
+  --color-c3: var(--c3);
+  --color-c4: var(--c4);
+  --color-c5: var(--c5);
+  --color-c6: var(--c6);
+  --color-c7: var(--c7);
+  --color-c8: var(--c8);
+  --color-dk: var(--dk);
+  --color-dk2: var(--dk2);
+  --color-dk3: var(--dk3);
+  --color-lt: var(--lt);
+  --color-lt2: var(--lt2);
+  --color-lt3: var(--lt3);
+  --color-lt4: var(--lt4);
+  --color-warm: var(--warm);
+  --color-warmdk: var(--warmdk);
+  --color-txt: var(--txt);
+  --color-txtm: var(--txtm);
+  --color-txtl: var(--txtl);
+  --color-wh: var(--wh);
+  --color-wht: var(--wht);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --c1: #063D3D; --c2: #0C5C5C; --c3: #147070; --c4: #1A8A7D;
+  --c5: #1B9E8B; --c6: #3BB5A0; --c7: #6CC5D9; --c8: #A0DDE8;
+  --dk: #060E0E; --dk2: #091414; --dk3: #0E1F1F;
+  --lt: #FAFCFB; --lt2: #F3F7F6; --lt3: #EBF1EF; --lt4: #E2ECEA;
+  --warm: #F8F6F3; --warmdk: #EDE8E3;
+  --txt: #0B1D1D; --txtm: #4A6868; --txtl: #7A9999;
+  --wh: #FFFFFF; --wht: rgba(255, 255, 255, 0.55);
+  --brl: rgba(12, 40, 40, 0.08); --brd: rgba(255, 255, 255, 0.08);
+  --grad: linear-gradient(135deg, #6CC5D9, #1B9E8B);
+  --f-heading: var(--font-heading), sans-serif; --f-body: var(--font-body), sans-serif;
+  --e: cubic-bezier(.16, 1, .3, 1);
 }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--c3) var(--lt);
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--lt); }
+::-webkit-scrollbar-thumb { background: var(--c3); border-radius: 3px; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--f-body);
+  background: var(--lt);
+  color: var(--txt);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Base custom styles needed for exact match where Tailwind is too verbose */
+.hero-pin { position: sticky; top: 0; z-index: 1; height: 100vh; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.hero-reveal { position: relative; z-index: 2; border-radius: 22px 22px 0 0; box-shadow: 0 -40px 100px rgba(0,0,0,.25); }
+
+@keyframes ldFill { to { width: 100%; } }
+@keyframes heroZ { from { transform: scale(1.02) translate(0, 0); } to { transform: scale(1.18) translate(-2%, -1.5%); } }
+@keyframes clpR { to { clip-path: inset(0); } }
+@keyframes txtU { to { opacity: 1; transform: none; } }
+@keyframes fU { to { opacity: 1; transform: none; } }
+@keyframes scD { 0% { top: -50%; } 60% { top: 110%; } 100% { top: 110%; } }
+@keyframes mqS { to { transform: translateX(-50%); } }
+
+.ld-bar i { display: block; height: 100%; width: 0; background: var(--grad); animation: ldFill 1.6s var(--e) forwards; }
+.hero-bg img { animation: heroZ 20s ease-in-out infinite alternate; }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,14,14,.45) 0%, rgba(6,14,14,.05) 35%, rgba(6,14,14,.7) 88%), linear-gradient(90deg, rgba(6,14,14,.35) 0%, transparent 60%); }
+.hero-tag { clip-path: inset(0 100% 0 0); animation: clpR 1s var(--e) .6s forwards; }
+.hl span { opacity: 0; transform: translateY(110%) rotate(1.5deg); animation: txtU 1.1s var(--e) forwards; display: inline-block; }
+.hl:nth-child(1) span { animation-delay: .8s; }
+.hl:nth-child(2) span { animation-delay: .95s; }
+.hem { background: linear-gradient(135deg, var(--c8), var(--c6)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { opacity: 0; transform: translateY(25px); animation: fU .8s var(--e) 1.3s forwards; }
+.hero-btns { opacity: 0; transform: translateY(20px); animation: fU .8s var(--e) 1.5s forwards; }
+.hero-ft { opacity: 0; animation: fU .8s var(--e) 1.8s forwards; }
+.hero-sc { opacity: 0; animation: fU .8s var(--e) 2s forwards; }
+.scl::after { content: ''; position: absolute; width: 100%; height: 50%; background: var(--c7); top: -50%; animation: scD 2.5s ease-in-out infinite; }
+.abn-v { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.ab-accent span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.mqt { animation: mqS 50s linear infinite; }
+.eco-ct { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.fmv { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nv { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.sr { opacity: 0; transform: translateY(45px); transition: opacity .9s var(--e), transform .9s var(--e); }
+.sr.v { opacity: 1; transform: none; }
+.sr-d1 { transition-delay: .1s; } .sr-d2 { transition-delay: .2s; } .sr-d3 { transition-delay: .3s; } .sr-d4 { transition-delay: .4s; }
+.sr-s { opacity: 0; transform: scale(.96); transition: opacity 1s var(--e), transform 1s var(--e); }
+.sr-s.v { opacity: 1; transform: none; }
+
+/* Global components to map to Tailwind styles in React but keeping some base logic here */
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--c5); transition: width .4s var(--e); }
+.nav-link:hover::after { width: 100%; }
+.ghost::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: currentColor; opacity: .3; transform: scaleX(.35); transform-origin: left; transition: .4s var(--e); }
+.ghost:hover::after { transform: scaleX(1); opacity: .6; }
+
+/* Keep some specific structural styling for responsive cases that are complex */
+@media(max-width:1100px){
+    .hero-reveal, .fb-radius { border-radius: 14px 14px 0 0; }
+}
+@media(max-width:768px){
+    .hero-reveal, .fb-radius { border-radius: 12px 12px 0 0; }
+}
+
+h1, h2, h3, h4, h5, h6, .hero-tag, .ab-accent span, .eco-ct { font-family: var(--f-heading); letter-spacing: -0.02em; }
+.font-body { font-family: var(--f-body); }
+
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 30s linear infinite; display: flex; width: max-content; }
+
+.font-heading { font-family: var(--f-heading); }
